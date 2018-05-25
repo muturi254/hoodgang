@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'gang.apps.GangConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
