@@ -51,7 +51,7 @@ def new_hood(request):
 def hood_post(request):
     current_user = request.user
     if request.method == 'POST':
-        post_form = PostForm(request.POST)
+        post_form = PostForm(request.POST, request.FILES)
         if post_form.is_valid():
             post = post_form.save(commit=False)
             post.post_by_id = current_user.id
