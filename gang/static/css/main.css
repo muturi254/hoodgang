@@ -1,0 +1,7 @@
+body{
+    background-image: url(../images/community.jpg);
+    background-size: cover;
+}
+.block{
+    padding: 30vh;
+}
