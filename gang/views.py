@@ -2,10 +2,9 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from .models import Profile, Business
+from .forms import ProfileForm
 # Create your views here.
 def index(request):
-    profile = Profile.objects.filter(user=request.user)
-    print(Profile._meta.get_fields())
     return render(request, 'index.html')
 
 def home(request):
@@ -30,4 +29,5 @@ def profile_edit(request, user_id):
     #         messages.error(request, ('Please correct the error below.'))
     # else:
     #     profile_form = ProfileForm(instance=request.user.profile)
-    return render(request, 'edit-profile.html')
+    form = ProfileForm()
+    return render(request, 'edit-profile.html', {'form': form})
