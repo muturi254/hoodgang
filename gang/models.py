@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 class Neighbourhood(models.Model):
     hood_name = models.CharField(max_length=30, unique=True)
@@ -31,7 +32,7 @@ class Profile(models.Model):
     avatar = models.ImageField(upload_to='avatar', blank=True)
     bio = models.TextField(max_length=500, blank=True)
     neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE, related_name='neighbourhood')
-    birth_date = models.DateTimeField(null=True, blank=True)
+    birth_date = models.DateField(null=True, blank=True)
     business = models.BooleanField(default=False)
 
 class Business(models.Model):
