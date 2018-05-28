@@ -2,17 +2,18 @@
 {% block content %}
 <div class="container">
     <div class="row justify-content-center">
-        <div class="card">
-            {% if form.errors %}
+        <div class="block">
+            <div class="card">
+                {% if form.errors %}
                 <p> Some Information Might be Incorrect </p>
-            {% endif %}
-            <div class="card-body">
-                <form action="/accounts/register/" method="POST">
-                    {% csrf_token %}
-                    {% bootstrap_form form %}
-                    <input type="submit" class="btn btn-secondary" value="Sign Up">
-                    <input type="hidden" name="{{next}}">
-                </form>
+                {% endif %}
+                <div class="card-body" style="width: 30em">
+                    <form action="/accounts/register/" method="POST">
+                        {% csrf_token %} {% bootstrap_form form layout='inline' %}
+                        <input type="submit" class="btn btn-secondary" value="Sign Up">
+                        <input type="hidden" name="{{next}}">
+                    </form>
+                </div>
             </div>
         </div>
     </div>
