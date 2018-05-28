@@ -1,4 +1,4 @@
-{% load boostrap4%}
+{% load bootstrap4%}
 {% load static%}
 <!DOCTYPE html>
 <html lang="en">
@@ -14,12 +14,12 @@
     <title>Document</title>
 </head>
 <body>
-    {% include "navbar.html"%}
+    {% include "./includes/navbar.html"%}
     {% block content %}
 
     {% endblock %}
     {% block scripts %}
         {% bootstrap_javascript jquery="full" %}
-    {% enblock %}
+    {% endblock %}
 </body>
 </html>
