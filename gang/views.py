@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from .models import Profile, Business
+from django.contrib import messages
 from .forms import ProfileForm
 # Create your views here.
 def index(request):
@@ -17,17 +18,16 @@ def profile(request, user_id):
 @login_required(login_url='/accounts/login/')
 @transaction.atomic
 def profile_edit(request, user_id):
-    # if request.method == 'POST':
-    #     profile_form = ProfileForm(
-    #         request.POST, request.FILES, instance=request.user.profile)
-    #     if profile_form.is_valid():
-    #         profile_form.save()
-    #         # messages.success(request, _(
-    #         #     'Your profile was successfully updated!'))
-    #         return redirect('profile', user_id)
-    #     else:
-    #         messages.error(request, ('Please correct the error below.'))
-    # else:
-    #     profile_form = ProfileForm(instance=request.user.profile)
-    form = ProfileForm()
-    return render(request, 'edit-profile.html', {'form': form})
+    if request.method == 'POST':
+        profile_form = ProfileForm(
+            request.POST, request.FILES, instance=request.user.profile)
+        if profile_form.is_valid():
+            profile_form.save()
+            # messages.success(request, _(
+            #     'Your profile was successfully updated!'))
+            return redirect('profile', user_id)
+        else:
+            messages.error(request, ('Please correct the error below.'))
+    else:
+        profile_form = ProfileForm(instance=request.user.profile)
+    return render(request, 'edit-profile.html', {"profile_form": profile_form})

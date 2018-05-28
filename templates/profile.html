@@ -1,6 +1,24 @@
 {% extends './base.html' %} {%load bootstrap4%} {%load static%} {% block content %}
 <div class="container">
-    abujuju
-    <p>{{request.user.username}}</p>
+    <br>
+    <div class="row">
+        <div class="col-md-4">
+            <img src="{{ user.profile.avatar.url}}" class="img-fluid">
+            <br>
+            <a href="{% url 'profile_edit' request.user.id%}" class="btn btn-info btn-lg d-block">edit Profile</a>    
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <p class="lead font-italic font-bold">{{ user.username}}</p>
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote">
+                        <p class="mb-0">{{user.profile.bio}}</p>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
