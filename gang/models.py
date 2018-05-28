@@ -49,6 +49,6 @@ class Category(models.Model):
 
 class Post(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
-    post_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    post_by = models.ForeignKey(Profile, on_delete=models.CASCADE)
     post_body = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
