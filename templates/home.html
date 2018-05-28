@@ -1,7 +1,7 @@
 {% extends './base.html'%}
 {% block content %}
     <div class="container">
-        <p>helo</p>
+        <br>
         {% for post in post %}
             <div class="card">
                 <div class="card-header">
@@ -10,8 +10,14 @@
                     {% endif %}
                     <span class="font-italic font-weight-bold">{{ post.post_by}}</span>
                 </div>
+                {% if post.post_image%}
+                <img src="{{post.post_image.url}}" class="card-img-top">
+
+                {% endif %}
                 <div class="card-body">
                     <p>{{ post}}</p>
+                    <p class="font-weight-bold">{{post.pub_date}}</p>
+                    <p>{{post.post_image}}</p>
                 </div>
             </div>
             <br><br>
