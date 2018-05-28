@@ -2,5 +2,19 @@
 {% block content %}
     <div class="container">
         <p>helo</p>
+        {% for post in post %}
+            <div class="card">
+                <div class="card-header">
+                    {% if user.profile.avatar %}
+                    <span><img src="{{user.profile.avatar.url}}" class="img-fluid profile"></span>
+                    {% endif %}
+                    <span class="font-italic font-weight-bold">{{ post.post_by}}</span>
+                </div>
+                <div class="card-body">
+                    <p>{{ post}}</p>
+                </div>
+            </div>
+            <br><br>
+        {% endfor %}
     </div>
 {% endblock %}

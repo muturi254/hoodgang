@@ -1,5 +1,5 @@
 from django import forms
-from .models import Profile, Neighbourhood, Post
+from .models import Profile, Neighbourhood, Post, Business
 from django.forms.extras.widgets import SelectDateWidget
 
 class ProfileForm(forms.ModelForm):
@@ -19,3 +19,8 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         exclude = ['post_by']
+
+class BusinessForm(forms.ModelForm):
+    class Meta:
+        model = Business
+        exclude = ['business_owner']

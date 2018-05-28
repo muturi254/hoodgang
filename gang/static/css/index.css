@@ -2,4 +2,9 @@
     color: red !important;
     border-radius:10%;
 }
-/* <input type="file" name="avatar" class="" title="" id="id_avatar"> */
+
+.profile{
+    height: 7vh !important;
+    width: 3vw !important;
+    border-radius: 100%;
+}

@@ -3,15 +3,17 @@ from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from .models import Profile, Business, Post
 from django.contrib import messages
-from .forms import ProfileForm, NeighbourhoodForm, PostForm
+from .forms import ProfileForm, NeighbourhoodForm, PostForm, BusinessForm
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
 
 def home(request):
-
+    current_user = request.user.profile
+    post = Post.objects.filter(post_by__neighbourhood=current_user.neighbourhood)
+    # print(post)
     
-    return render(request, 'home.html')
+    return render(request, 'home.html', {'post':post})
 @login_required(login_url='/accounts/login/')
 def profile(request, user_id):
     return render(request, 'profile.html')
@@ -59,3 +61,18 @@ def hood_post(request):
     else:
         post_form = PostForm()
     return render(request, 'newpost.html', {'post_form': post_form})
+
+@login_required(login_url="/accounts/login/")
+def new_bisuness(request):
+    current_user = request.user
+    if request.method == 'POST':
+        biz_form = BusinessForm(request.POST)
+        if biz_form.is_valid():
+            form = biz_form.save(commit=False)
+            form.business_owner = current_user
+            biz_form.save()
+
+            return redirect('home')
+    else:
+        biz_form = BusinessForm()
+    return render(request, 'business.html', {'biz_form': biz_form})
