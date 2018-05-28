@@ -6,9 +6,7 @@
     <div class="container">
         <div class="row justify-content-center block">
             <div class="card" style="width: 30em;">
-                {% if form.errors %}
-                    <p> Some Information Might be Incorrect </p>
-                {% endif %}
+
                 <div class="card-body">
                     <form action="" method="POST">  
                         {% csrf_token%}
