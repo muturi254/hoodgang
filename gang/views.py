@@ -1,14 +1,15 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
-from .models import Profile, Business
+from .models import Profile, Business, Post
 from django.contrib import messages
-from .forms import ProfileForm
+from .forms import ProfileForm, NeighbourhoodForm, PostForm
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
 
 def home(request):
+
     
     return render(request, 'home.html')
 @login_required(login_url='/accounts/login/')
@@ -31,3 +32,30 @@ def profile_edit(request, user_id):
     else:
         profile_form = ProfileForm(instance=request.user.profile)
     return render(request, 'edit-profile.html', {"profile_form": profile_form})
+
+
+@login_required(login_url='/accounts/login/')
+def new_hood(request):
+    if request.method == 'POST':
+        hood_form = NeighbourhoodForm(request.POST)
+        if hood_form.is_valid():
+            hood_form.save()
+            return redirect('home')
+    
+    else:
+        hood_form = NeighbourhoodForm()
+    return render(request, 'hood.html', {'hood_form': hood_form})
+@login_required(login_url="/accounts/login/")
+def hood_post(request):
+    current_user = request.user
+    if request.method == 'POST':
+        post_form = PostForm(request.POST)
+        if post_form.is_valid():
+            post = post_form.save(commit=False)
+            post.post_by_id = current_user.id
+            post_form.save()
+            return redirect('home')
+
+    else:
+        post_form = PostForm()
+    return render(request, 'newpost.html', {'post_form': post_form})
